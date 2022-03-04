@@ -22,7 +22,11 @@ public class PessoaService {
     public void save(Pessoa pessoa) throws Exception {
 
         if(Validate.isCPF(pessoa.getCpf())) {
+          if(pessoa.getSexo()!= null)
             pessoaRep.save(pessoa);
+          else{
+              throw new Exception("Sexo inválido!");
+          }
         }
         else {
             throw new Exception("CPF inválido!");
