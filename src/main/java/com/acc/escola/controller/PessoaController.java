@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/pessoa")
+@RequestMapping("/pessoas")
 public class PessoaController {
 
     @Autowired
@@ -26,20 +26,20 @@ public class PessoaController {
     @GetMapping
     public String viewPessoaHome(Model model, RedirectAttributes redirectAttr) {
         List<Pessoa> lista =  pessoaSvc.listAll();
-        model.addAttribute("pessoa", lista);
-        return "pessoa/index";
+        model.addAttribute("pessoas", lista);
+        return "pessoas/index";
     }
     @GetMapping("new")
     public String newPessoa(Model model) {
         Pessoa pessoa = new Pessoa();
         model.addAttribute("pessoa", pessoa);
-        return "pessoa/new";
+        return "pessoas/new";
     }
     @PostMapping("save")
     public String savePessoa(@Valid Pessoa pessoa, BindingResult bindingResult, RedirectAttributes redirectAttr) {
         if (bindingResult.hasErrors()) {
             redirectAttr.addFlashAttribute("errorMessage", "Erro ao salvar");
-            return "pessoa/new";
+            return "pessoas/new";
         }
         try {
             pessoaSvc.save(pessoa);
@@ -49,13 +49,13 @@ public class PessoaController {
 
         }
 
-        return "redirect:/pessoa";
+        return "redirect:/pessoas";
     }
     @PostMapping("savedit")
     public String saveditPessoa(@Valid Pessoa pessoa, BindingResult bindingResult, RedirectAttributes redirectAttr) {
         if (bindingResult.hasErrors()) {
             redirectAttr.addFlashAttribute("errorMessage", "Erro ao salvar");
-            return "pessoa/edit";
+            return "pessoas/edit";
         }
         try {
             pessoaSvc.save(pessoa);
@@ -64,7 +64,7 @@ public class PessoaController {
             redirectAttr.addFlashAttribute("errorMessage", e.getMessage());
 
         }
-        return "redirect:/pessoa";
+        return "redirect:/pessoas";
     }
     @RequestMapping("edit/{id}")
     public ModelAndView editPessoa(@PathVariable(name = "id") int id, RedirectAttributes redirectAttr) {
@@ -74,7 +74,7 @@ public class PessoaController {
             redirectAttr.addFlashAttribute("errorMessage", "Pessoa " + id + " não foi encontrado");
             return new ModelAndView("redirect:/pessoa");
         }
-        model.addObject("pessoa", pessoa);
+        model.addObject("pessoas", pessoa);
         return model;
     }
     @RequestMapping("delete/{id}")
@@ -85,6 +85,6 @@ public class PessoaController {
         } else {
             pessoaSvc.delete(id);
         }
-        return "redirect:/pessoa";
+        return "redirect:/pessoas";
     }
 }
