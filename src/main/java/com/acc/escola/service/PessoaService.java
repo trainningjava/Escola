@@ -22,8 +22,14 @@ public class PessoaService {
     public void save(Pessoa pessoa) throws Exception {
 
         if(Validate.isCPF(pessoa.getCpf())) {
-          if(pessoa.getSexo()!= null)
-            pessoaRep.save(pessoa);
+          if(pessoa.getSexo()!= null) {
+              if(pessoa.getTipo() != null) {
+                  pessoaRep.save(pessoa);
+              }
+              else{
+                  throw new Exception("Tipo inválido!");
+              }
+            }
           else{
               throw new Exception("Sexo inválido!");
           }
@@ -41,10 +47,5 @@ public class PessoaService {
     public void delete(long id) {
         pessoaRep.deleteById(id);
     }
-
-
-
-// colocar a parte do enum
-    // validar o cpf
 
 }

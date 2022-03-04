@@ -43,13 +43,14 @@ public class Pessoa implements Serializable {
         this.sexo = sexo.getCod();
     }
 
+        @Column( name = "Tipo")
+    private Integer tipo;
+    public String getTipo() {
+        return Tipo.toEnum(tipo).getlabel();
+    }
 
-
-
-
-
-
-    //    @Column( name = "Tipo")
-//    private Integer tipo;
+    public void getTipo(Tipo tipo) {
+        this.tipo = tipo.getCod();
+    }
 
 }
