@@ -80,20 +80,18 @@
                     <tr>
                         <td>Sexo:</td>
                         <td>
-                            <input class="form-control" type="text" id="sexo">
-<!--                            <select name="sexo" id="sexo" class="form-control">-->
-<!--                                <option value=1>Masculino</option>-->
-<!--                                <option value=2>Feminino</option>-->
-<!--                                <option value=3>Outros</option>-->
-<!--                            </select>-->
+                            <select name="sexo" id="sexo" class="form-control">
+                            <option th:each="sexs : ${listaSexos}"
+                                    th:value="${sexs.cod}" th:text="${sexs}"></option>
+                            </select>
                         </td>
                      </tr>
                      <tr>
                       <td>Tipo:</td>
                        <td>
                          <select name="tipo" id="tipo" class="form-control">
-                          <option value=1>Sem bolsa</option>
-                         <option value=2>Bolsista</option>
+                             <option th:each="tips : ${listaTipos}"
+                                     th:value="${tips.cod}" th:text="${tips}"></option>
                          </select>
 
                      </td>

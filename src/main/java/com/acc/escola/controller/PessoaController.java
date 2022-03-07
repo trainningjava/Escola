@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 
+import com.acc.escola.enums.Sexo;
+import com.acc.escola.enums.Tipo;
 import com.acc.escola.model.Pessoa;
 import com.acc.escola.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,8 @@ public class PessoaController {
     public String newPessoa(Model model) {
         Pessoa pessoa = new Pessoa();
         model.addAttribute("pessoa", pessoa);
+        model.addAttribute("listaSexos", Sexo.values());
+        model.addAttribute("listaTipos", Tipo.values());
         return "pessoas/new";
     }
     @PostMapping("save")

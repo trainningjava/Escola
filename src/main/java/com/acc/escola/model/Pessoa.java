@@ -10,14 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
-
-
-
-
 public class Pessoa implements Serializable {
     private static final long serialVersionUID = 7670534790770756526L;
 
@@ -31,8 +24,37 @@ public class Pessoa implements Serializable {
 
     @Column( name = "CPF", length = 14)
     private String cpf;
+
     private Sexo sexo;
+
     private Tipo tipo;
+
+    public Pessoa() {
+    }
+
+    public Pessoa(Long id, String nome, String cpf, Sexo sexo, Tipo tipo) {
+        this.id = id;
+        this.nome = nome;
+        this.cpf = cpf;
+        setSexo(sexo);
+        setTipo(tipo);
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 
     public Sexo getSexo() {
         return Sexo.toEnum(sexo);
