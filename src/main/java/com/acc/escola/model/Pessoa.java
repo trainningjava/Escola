@@ -1,21 +1,13 @@
 package com.acc.escola.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.acc.escola.enums.Sexo;
+import com.acc.escola.enums.Tipo;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
-
-
-
-
 public class Pessoa implements Serializable {
     private static final long serialVersionUID = 7670534790770756526L;
 
@@ -30,27 +22,42 @@ public class Pessoa implements Serializable {
     @Column( name = "CPF", length = 14)
     private String cpf;
 
-    @Column( name = "Sexo", nullable=false)
-//    @NotEmpty(message = "O campo nome não pode ser em branco")
-//    @Enumerated(EnumType.STRING)
-    private Integer sexo;
+    private Sexo sexo;
 
-    public String getSexo() {
-        return Sexo.toEnum(sexo).getlabel();
+    private Tipo tipo;
+
+    public Pessoa() {
+    }
+
+    public Pessoa(String nome, String cpf, Sexo sexo, Tipo tipo) {
+        this.nome = nome;
+        this.cpf = cpf;
+        setSexo(sexo);
+        setTipo(tipo);
+    }
+
+    public Pessoa(Long id, String nome, String cpf, Sexo sexo, Tipo tipo) {
+        this.id = id;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.sexo = sexo;
+        this.tipo = tipo;
+    }
+
+    public Sexo getSexo() {
+        return Sexo.toEnum(sexo);
     }
 
     public void setSexo(Sexo sexo) {
-        this.sexo = sexo.getCod();
+        this.sexo = sexo;
     }
 
-        @Column( name = "Tipo")
-    private Integer tipo;
-    public String getTipo() {
-        return Tipo.toEnum(tipo).getlabel();
+    public Tipo getTipo() {
+        return Tipo.toEnum (tipo);
     }
 
-    public void getTipo(Tipo tipo) {
-        this.tipo = tipo.getCod();
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
     }
 
 }
