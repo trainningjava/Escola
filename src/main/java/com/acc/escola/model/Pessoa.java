@@ -31,8 +31,7 @@ public class Pessoa implements Serializable {
     private String cpf;
 
     @Column( name = "Sexo", nullable=false)
-//    @NotEmpty(message = "O campo nome não pode ser em branco")
-//    @Enumerated(EnumType.STRING)
+    @NotEmpty(message = "O campo nome não pode ser em branco")
     private Integer sexo;
 
     public String getSexo() {

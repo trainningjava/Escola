@@ -76,14 +76,38 @@
 
                     </tr>
 
-<!--                    <tr>-->
-<!--                        <td>Nome da Turma:</td>-->
-<!--                        <td>-->
-<!--                            <input class="form-control" type="text" th:field="*{nome}" id="nome">-->
-<!--                            <div class="alert alert-warning" th:if="${#fields.hasErrors('nome')}" th:errorclass="error"  th:errors="*{nome}"></div>-->
-<!--                        </td>-->
+                    <tr>
+                        <td>CPF da Pessoa:</td>
+                        <td>
+                            <input class="form-control" type="text" th:field="*{cpf}" id="cpf">
+                            <div class="alert alert-warning" th:if="${#fields.hasErrors('nome')}" th:errorclass="error"  th:errors="*{cpf}"></div>
+                        </td>
+                    </tr>
 
-<!--                    </tr>-->
+                    </tr>
+                    <tr>
+                        <td>Sexo:</td>
+                        <td>
+                            <select sexo="sexo" id="sexo" class="form-control">
+                                <option value="1">Masculino</option>
+                                <option value="2">Feminino</option>
+                                <option value="3">Outros</option>
+                            </select>
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tipo:</td>
+                        <td>
+                            <select tipo="tipo" id="tipo" class="form-control">
+                                <option value="1">Sem bolsa</option>
+                                <option value="2">Bolsista</option>
+                            </select>
+
+
+                        </td>
+
                     <tr class="mb-2">
                         <td><button class="btn btn-primary" type="submit">Save</button> </td>
                         <td><a class="btn btn-secondary btn-lg active" aria-pressed="true" href="/pessoas">Voltar</a></td>
