@@ -30,8 +30,7 @@ public class Pessoa implements Serializable {
     @Column( name = "CPF", length = 14)
     private String cpf;
 
-    @Column( name = "Sexo", nullable=false)
-    @NotEmpty(message = "O campo nome não pode ser em branco")
+    @Column( name = "Sexo")
     private Integer sexo;
 
     public String getSexo() {
