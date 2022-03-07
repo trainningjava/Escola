@@ -80,7 +80,7 @@
                     <tr>
                         <td>Sexo:</td>
                         <td>
-                            <select name="sexo" id="sexo" class="form-control">
+                            <select name="sexo" class="form-select">
                             <option th:each="sexs : ${listaSexos}"
                                     th:value="${sexs.cod}" th:text="${sexs}"></option>
                             </select>
@@ -89,7 +89,7 @@
                      <tr>
                       <td>Tipo:</td>
                        <td>
-                         <select name="tipo" id="tipo" class="form-control">
+                           <select name="tipo" class="form-select">
                              <option th:each="tips : ${listaTipos}"
                                      th:value="${tips.cod}" th:text="${tips}"></option>
                          </select>
