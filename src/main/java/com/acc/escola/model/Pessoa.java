@@ -1,5 +1,7 @@
 package com.acc.escola.model;
 
+import com.acc.escola.enums.Sexo;
+import com.acc.escola.enums.Tipo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,28 +31,24 @@ public class Pessoa implements Serializable {
 
     @Column( name = "CPF", length = 14)
     private String cpf;
+    private Sexo sexo;
+    private Tipo tipo;
 
-    @Column( name = "Sexo", nullable=false)
-//    @NotEmpty(message = "O campo nome não pode ser em branco")
-//    @Enumerated(EnumType.STRING)
-    private Integer sexo;
-
-    public String getSexo() {
-        return Sexo.toEnum(sexo).getlabel();
+    public Sexo getSexo() {
+        return Sexo.toEnum(sexo);
     }
 
     public void setSexo(Sexo sexo) {
-        this.sexo = sexo.getCod();
+        this.sexo = sexo;
     }
 
-        @Column( name = "Tipo")
-    private Integer tipo;
-    public String getTipo() {
-        return Tipo.toEnum(tipo).getlabel();
+    public Tipo getTipo() {
+
+        return Tipo.toEnum(tipo);
     }
 
-    public void getTipo(Tipo tipo) {
-        this.tipo = tipo.getCod();
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
     }
 
 }
