@@ -72,13 +72,13 @@ public class PessoaController {
     }
     @RequestMapping("edit/{id}")
     public ModelAndView editPessoa(@PathVariable(name = "id") int id, RedirectAttributes redirectAttr) {
-        ModelAndView model = new ModelAndView("pessoa/edit");
+        ModelAndView model = new ModelAndView("pessoas/edit");
         Optional<Pessoa> pessoa = pessoaSvc.get(id);
         if (!pessoa.isPresent()) {
             redirectAttr.addFlashAttribute("errorMessage", "Pessoa " + id + " não foi encontrado");
-            return new ModelAndView("redirect:/pessoa");
+            return new ModelAndView("redirect:/pessoas");
         }
-        model.addObject("pessoas", pessoa);
+        model.addObject("pessoa", pessoa);
         return model;
     }
     @RequestMapping("delete/{id}")
