@@ -80,8 +80,8 @@
         <tr th:each="pessoa: ${pessoas}">
             <td th:text="${pessoa.id}"></td>
             <td th:text="${pessoa.nome}"></td>
-            <td><a th:href="@{/pessoa/edit/{pessoaId} (pessoaId = ${pessoa.id})}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-            <td><a th:href="@{/pessoa/delete/{pessoaId} (pessoaId = ${pessoa.id})}" th:onclick="if(!(confirm('Tem certeza que deseja excluir ?' ) )) return false"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+            <td><a th:href="@{/pessoas/edit/{pessoaId} (pessoaId = ${pessoa.id})}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+            <td><a th:href="@{/pessoas/delete/{pessoaId} (pessoaId = ${pessoa.id})}" th:onclick="if(!(confirm('Tem certeza que deseja excluir ?' ) )) return false"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
         </tr>
         </tbody>
     </table>
