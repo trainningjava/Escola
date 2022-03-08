@@ -1,21 +1,21 @@
 package com.acc.escola.enums;
 
 public enum Tipo {
-    ALUNO(1),
-    BOLSISTA(2);
+    ALUNO("1"),
+    BOLSISTA("2");
 
-    private int cod;
+    private String cod;
 
-    private Tipo(Integer id){
+    Tipo(String id){
         this.cod = id;
     }
 
-    public int getCod() {
+    public String getCod() {
         return cod;
     }
 
 
-    public static Tipo toEnum(Tipo cod){
+    public static Tipo toEnum(String cod){
         for(Tipo x : Tipo.values()){
             if(cod.equals(x.getCod())){
                 return x;

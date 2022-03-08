@@ -2,22 +2,22 @@ package com.acc.escola.enums;
 
 public enum Sexo {
 
-        MASCULINO(1),
-        FEMININO(2),
-        OUTROS(3);
+        MASCULINO("1"),
+        FEMININO("2"),
+        OUTROS("3");
 
-        private int cod;
+        private final String cod;
 
-        private Sexo(Integer id){
+        Sexo(String id){
             this.cod = id;
         }
 
-        public int getCod() {
-        return cod;
-    }
+        public String getCod() {
+            return cod;
+        }
 
 
-        public static Sexo toEnum(Sexo cod){
+        public static Sexo toEnum(String cod){
             for(Sexo x : Sexo.values()){
                 if(cod.equals(x.getCod())){
                     return x;

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
@@ -25,8 +26,12 @@ public class Pessoa implements Serializable {
     @Column( name = "CPF", length = 14)
     private String cpf;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "pessoa_sexo", nullable = false)
     private Sexo sexo;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "pessoa_tipo", nullable = false)
     private Tipo tipo;
 
     public Pessoa() {
@@ -36,8 +41,8 @@ public class Pessoa implements Serializable {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
-        setSexo(sexo);
-        setTipo(tipo);
+        this.sexo = sexo;
+        this.tipo = tipo;
     }
 
     public String getNome() {
@@ -56,21 +61,21 @@ public class Pessoa implements Serializable {
         this.cpf = cpf;
     }
 
+    @Enumerated(EnumType.STRING)
     public Sexo getSexo() {
-        return Sexo.toEnum(sexo);
+        return sexo;
     }
 
-    public void setSexo(Sexo sexo) {
-        this.sexo = sexo;
+    public void setSexo(String sexo) {
+        this.sexo = Sexo.toEnum(sexo);
     }
 
     public Tipo getTipo() {
-
-        return Tipo.toEnum(tipo);
+        return tipo;
     }
 
-    public void setTipo(Tipo tipo) {
-        this.tipo = tipo;
+    public void setTipo(String tipo) {
+        this.tipo = Tipo.toEnum(tipo);
     }
 
 }
