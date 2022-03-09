@@ -89,7 +89,7 @@
                      <tr>
                       <td>Tipo:</td>
                        <td>
-                           <select th:field="*{tipo}" class="form-select">
+                           <select th:field="*{tipo}" id="tipo" class="form-select">
                              <option th:each="tips : ${listaTipos}"
                                      th:value="${tips.cod}" th:text="${tips}"></option>
                          </select>

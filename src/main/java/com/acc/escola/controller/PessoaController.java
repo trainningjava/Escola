@@ -27,12 +27,6 @@ public class PessoaController {
     @Autowired
     private PessoaService pessoaSvc;
 
-    private static Pessoa apply(Pessoa mig) {
-        mig.setSexo(Sexo.toEnum(mig.getSexo()).name());
-        mig.setTipo(Sexo.toEnum(mig.getTipo()).name());
-        return mig;
-    }
-
     @GetMapping
     public String viewPessoaHome(Model model, RedirectAttributes redirectAttr) {
         List<Pessoa> lista =  pessoaSvc.listAll();
@@ -97,6 +91,8 @@ public class PessoaController {
             return new ModelAndView("redirect:/pessoas");
         }
         model.addObject("pessoa", pessoa);
+        model.addObject("listaSexos", Sexo.values());
+        model.addObject("listaTipos", Tipo.values());
         return model;
     }
     @RequestMapping("delete/{id}")
