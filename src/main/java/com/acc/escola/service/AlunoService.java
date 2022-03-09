@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-
 @Service
 @Transactional
 public class AlunoService {
@@ -20,10 +19,14 @@ public class AlunoService {
 
     public List<Aluno> listAll() { return alunoRepository.findAll(); }
 
-    public void save(Aluno aluno) throws Exception {
-        alunoRepository.save(aluno);
+    public interface PessoaService {
 
     }
+
+    public void save(Aluno aluno) throws Exception {
+        alunoRepository.save(aluno);
+    }
+
     public Optional<Aluno> getAluno(long id) {
         return alunoRepository.findById(id);
     }

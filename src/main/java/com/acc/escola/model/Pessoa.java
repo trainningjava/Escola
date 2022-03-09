@@ -7,6 +7,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,6 +35,8 @@ public class Pessoa implements Serializable {
     @Column(name = "pessoa_tipo", nullable = false)
     private String tipo;
 
+    @OneToMany( mappedBy = "aluno", cascade = CascadeType.REMOVE)
+    private List<Aluno> alunoList;
 
     public void setSexo(String sexo) {
         this.sexo = Sexo.toEnum(sexo).getCod();
@@ -42,5 +45,6 @@ public class Pessoa implements Serializable {
     public void setTipo(String tipo) {
         this.tipo = Tipo.toEnum(tipo).getCod();
     }
+
 
 }

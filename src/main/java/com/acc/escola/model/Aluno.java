@@ -2,20 +2,43 @@ package com.acc.escola.model;
 
 
 import com.acc.escola.enums.AlunoTipoBolsa;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import org.hibernate.boot.model.source.spi.FetchCharacteristics;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
-public class Aluno extends Pessoa {
-
-    private static final long serialVersionUID = 7670534790770756526L;
+public class Aluno implements Serializable {
+    private static final long serialVersionUID = 986258492683413999L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //@NotEmpty(message = "Este campo nome não deve ser vazio")
+
+
+
+    @ManyToOne( targetEntity=Pessoa.class)
+    @JoinColumn(name = "AlunoID", insertable = false, updatable = false)
+    private Aluno aluno;
+
+    public Aluno getAluno() {
+        return aluno;
+    }
+
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
+    }
+
+    public void setAlunoVLMensalidade(int alunoVLMensalidade) {
+        this.alunoVLMensalidade = alunoVLMensalidade;
+    }
+
     private int alunoVLMensalidade ;
 
     private AlunoTipoBolsa alunoTipoBolsa;
