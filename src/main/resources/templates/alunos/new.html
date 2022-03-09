@@ -24,7 +24,7 @@
                     class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" th:href="@{/aluno}">Alunos</a>
+            <a class="navbar-brand" th:href="@{/alunos}">Alunos</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -57,7 +57,7 @@
         <thead>
         <tr>
             <th>
-                <form action="#" th:action="@{/aluno/save}" th:object="${aluno}" method="post">
+                <form action="#" th:action="@{/alunos/save}" th:object="${aluno}" method="post">
                     <table class="table table-striped table-bordered" >
                         <div th:if="${errorMessage}" th:text="${errorMessage}" class="error" />
                         <tr>
@@ -79,7 +79,7 @@
                         </tr>
                         <tr class="mb-2">
                             <td><button class="btn btn-primary" type="submit">Save</button> </td>
-                            <td><a class="btn btn-secondary btn-lg active" aria-pressed="true" href="/aluno">Voltar</a></td>
+                            <td><a class="btn btn-secondary btn-lg active" aria-pressed="true" href="/alunos">Voltar</a></td>
                         </tr>
 
                     </table>

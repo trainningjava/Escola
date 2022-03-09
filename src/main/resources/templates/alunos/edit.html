@@ -24,7 +24,7 @@
                     class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" th:href="@{/aluno}">Alunos</a>
+            <a class="navbar-brand" th:href="@{/alunos}">Alunos</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -38,7 +38,7 @@
 
                     <ul class="dropdown-menu">
                         <li><a th:href="@{/}">Home</a></li>
-                        <li><a th:href="@{/aluno}">Alunos</a></li>
+                        <li><a th:href="@{/alunos}">Alunos</a></li>
                     </ul>
                 </li>
             </ul>
@@ -57,7 +57,7 @@
         <tr>
             <th>
                 <!--/*@thymesVar id="aluno" type=""*/-->
-                <form action="#" th:action="@{/aluno/save}" th:object="${aluno}" method="post">
+                <form action="#" th:action="@{/alunos/save}" th:object="${aluno}" method="post">
                     <!--/*@thymesVar id="errorMessage" type=""*/-->
                     <div th:if="${errorMessage}" th:text="${errorMessage}" class="error" />
 

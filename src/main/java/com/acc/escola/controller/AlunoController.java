@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/aluno")
+@RequestMapping("/alunos")
 public class AlunoController {
 
     @Autowired
@@ -29,7 +29,7 @@ public class AlunoController {
     public String listarAlunos(Model model, RedirectAttributes redirectAttr) {
         List<Aluno> lista =  alunoService.listAll();
         model.addAttribute("Alunos: ", lista);
-        return "aluno/index";
+        return "alunos/index";
     }
     @GetMapping("new")
     public String cadastrarAluno(Model model) {
@@ -37,13 +37,13 @@ public class AlunoController {
         model.addAttribute("aluno", aluno);
         model.addAttribute("alunoTipoBolsa", AlunoTipoBolsa.values());
 
-        return "aluno/new";
+        return "alunos/new";
     }
     @PostMapping("save")
     public String saveAluno(@Valid Aluno aluno, BindingResult bindingResult, RedirectAttributes redirectAttr) throws Exception {
         if (bindingResult.hasErrors()) {
             redirectAttr.addFlashAttribute("errorMessage", "Erro ao salvar");
-            return "aluno/new";
+            return "alunos/new";
         }
         try {
             alunoService.save(aluno);
@@ -52,13 +52,13 @@ public class AlunoController {
             redirectAttr.addFlashAttribute("errorMessage", e.getMessage());
 
         }
-        return "redirect:/aluno";
+        return "redirect:/alunos";
     }
     @PostMapping("savedit")
     public String savEditPessoa(@Valid Aluno aluno, BindingResult bindingResult, RedirectAttributes redirectAttr) {
         if (bindingResult.hasErrors()) {
             redirectAttr.addFlashAttribute("errorMessage", "Erro ao salvar");
-            return "aluno/edit";
+            return "alunos/edit";
         }
         try {
             alunoService.save(aluno);
@@ -67,7 +67,7 @@ public class AlunoController {
             redirectAttr.addFlashAttribute("errorMessage", e.getMessage());
 
         }
-        return "redirect:/aluno";
+        return "redirect:/alunos";
     }
     @RequestMapping("edit/{id}")
     public ModelAndView editaDadosAluno (@PathVariable(name = "id") int id, RedirectAttributes redirectAttr) {
@@ -75,7 +75,7 @@ public class AlunoController {
         Optional<Aluno> aluno = alunoService.getAluno(id);
         if (!aluno.isPresent()) {
             redirectAttr.addFlashAttribute("errorMessage", "Aluno " + id + " não cadastrado");
-            return new ModelAndView("redirect:/pessoa");
+            return new ModelAndView("redirect:/alunos");
         }
         model.addObject("aluno", aluno);
         return model;
@@ -88,6 +88,6 @@ public class AlunoController {
         } else {
             alunoService.delete(id);
         }
-        return "redirect:/aluno";
+        return "redirect:/alunos";
     }
 }
