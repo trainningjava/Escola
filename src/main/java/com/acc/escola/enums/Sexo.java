@@ -2,9 +2,9 @@ package com.acc.escola.enums;
 
 public enum Sexo {
 
-        MASCULINO("1"),
-        FEMININO("2"),
-        OUTROS("3");
+        MASCULINO("M"),
+        FEMININO("F"),
+        OUTROS("O");
 
         private final String cod;
 
@@ -24,5 +24,14 @@ public enum Sexo {
                 }
             }
             throw new IllegalArgumentException("ID inválido:" + cod);
+    }
+
+    public static String toDesc(String cod){
+        for(Sexo x : Sexo.values()){
+            if(cod.equals(x.getCod())){
+                return x.name();
+            }
+        }
+        throw new IllegalArgumentException("ID inválido:" + cod);
     }
 }

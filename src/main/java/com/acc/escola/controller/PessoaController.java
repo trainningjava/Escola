@@ -2,11 +2,13 @@ package com.acc.escola.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 import com.acc.escola.enums.Sexo;
 import com.acc.escola.enums.Tipo;
 import com.acc.escola.model.Pessoa;
+import com.acc.escola.model.responses.PessoaRespDTO;
 import com.acc.escola.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +30,17 @@ public class PessoaController {
     @GetMapping
     public String viewPessoaHome(Model model, RedirectAttributes redirectAttr) {
         List<Pessoa> lista =  pessoaSvc.listAll();
-        model.addAttribute("pessoas", lista);
+        List<PessoaRespDTO> listaResp = lista.stream().map(resp -> {
+            PessoaRespDTO dto = new PessoaRespDTO();
+            dto.setId(resp.getId());
+            dto.setCpf(resp.getCpf());
+            dto.setNome(resp.getNome());
+            dto.setSexo(Sexo.toDesc(resp.getSexo()));
+            dto.setTipo( Tipo.toDesc(resp.getTipo()).replace("_", " "));
+            return dto;
+        }).collect(Collectors.toList());
+
+        model.addAttribute("pessoas", listaResp);
         return "pessoas/index";
     }
     @GetMapping("new")
@@ -78,7 +90,9 @@ public class PessoaController {
             redirectAttr.addFlashAttribute("errorMessage", "Pessoa " + id + " não foi encontrado");
             return new ModelAndView("redirect:/pessoas");
         }
-        model.addObject("pessoa", pessoa);
+        model.addObject("pessoa", pessoa.get());
+        model.addObject("listaSexos", Sexo.values());
+        model.addObject("listaTipos", Tipo.values());
         return model;
     }
     @RequestMapping("delete/{id}")

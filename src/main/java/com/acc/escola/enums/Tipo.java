@@ -1,8 +1,8 @@
 package com.acc.escola.enums;
 
 public enum Tipo {
-    ALUNO("1"),
-    BOLSISTA("2");
+    SEM_BOLSA("S"),
+    BOLSISTA("B");
 
     private String cod;
 
@@ -19,6 +19,15 @@ public enum Tipo {
         for(Tipo x : Tipo.values()){
             if(cod.equals(x.getCod())){
                 return x;
+            }
+        }
+        throw new IllegalArgumentException("ID inválido:" + cod);
+    }
+
+    public static String toDesc(String cod){
+        for(Tipo x : Tipo.values()){
+            if(cod.equals(x.getCod())){
+                return x.name();
             }
         }
         throw new IllegalArgumentException("ID inválido:" + cod);

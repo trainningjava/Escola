@@ -83,29 +83,23 @@
                             <div class="alert alert-warning" th:if="${#fields.hasErrors('nome')}" th:errorclass="error"  th:errors="*{cpf}"></div>
                         </td>
                     </tr>
-
-                    </tr>
                     <tr>
                         <td>Sexo:</td>
                         <td>
-                            <select sexo="sexo" id="sexo" class="form-control">
-                                <option value=1>Masculino</option>
-                                <option value=2>Feminino</option>
-                                <option value=3>Outros</option>
+                            <select th:field="*{sexo}" id="sexo">
+
+                                <option th:each="sexs : ${listaSexos}"
+                                        th:value="${sexs.cod}" th:text="${sexs}" th:selected="${sexs.cod} == *{sexo}"></option>
                             </select>
-
-
                         </td>
                     </tr>
                     <tr>
                         <td>Tipo:</td>
                         <td>
-                            <select tipo="tipo" id="tipo" class="form-control">
-                                <option value=1>Sem bolsa</option>
-                                <option value=2>Bolsista</option>
+                            <select th:field="*{tipo}" id="tipo"  class="form-select">
+                                <option th:each="tips : ${listaTipos}"
+                                        th:value="${tips.cod}" th:text="${tips}" th:selected="${tips.cod} == *{tipo}"></option>
                             </select>
-
-
                         </td>
 
                     <tr class="mb-2">
