@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Alterar um aluno</title>
+
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+
+    <link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet"/>
+
+    <link th:href="@{/webjars/font-awesome/css/font-awesome.min.css}" rel="stylesheet"/>
+
+    <link th:href="@{/css/estilo.css}" rel="stylesheet"/>
+</head>
+
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                    aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span> <span
+                    class="icon-bar"></span> <span class="icon-bar"></span> <span
+                    class="icon-bar"></span>
+            </button>
+
+            <a class="navbar-brand" th:href="@{/aluno}">Alunos</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle"
+                       data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">
+                        Menu
+                        <span class="caret"></span>
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{/}">Home</a></li>
+                        <li><a th:href="@{/aluno}">Alunos</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="page-header">
+        <h1>Alterar uma aluno</h1>
+    </div>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>
+                <!--/*@thymesVar id="aluno" type=""*/-->
+                <form action="#" th:action="@{/aluno/save}" th:object="${aluno}" method="post">
+                    <!--/*@thymesVar id="errorMessage" type=""*/-->
+                    <div th:if="${errorMessage}" th:text="${errorMessage}" class="error" />
+
+                    <table class="table table-striped table-bordered">
+                        <tr>
+                            <td>#:</td>
+                            <td>
+                                <input type="text" th:field="*{id}" readonly="readonly">
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>Aluno Mensalidade:</td>
+                            <td>
+                                <input class="form-control" type="text" th:field="*{alunoVLMensalidade}" id="AlunoVLMensalidade">
+                                <div class="alert alert-warning" th:if="${#fields.hasErrors('alunoVLMensalidade')}" th:errorclass="error"  th:errors="*{alunoVLMensalidade}"></div>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>Tipo de bolsa:</td>
+                            <td>
+                                <select alunoTipoBolsa="alunoTipoBolsa" id="alunoTipoBolsa" class="form-control">
+                                    <option value=1>B90</option>
+                                    <option value=2>B50</option>
+                                    <option value=2>B20</option>
+                                </select>
+
+
+                            </td>
+
+                        <tr class="mb-2">
+                            <td><button class="btn btn-primary" type="submit">Save</button> </td>
+                            <td><a class="btn btn-secondary btn-lg active" aria-pressed="true" href="/aluno">Voltar</a></td>
+                        </tr>
+
+                    </table>
+                </form>
+            </th>
+        </tr>
+        </thead>
+    </table>
+</div>
+
+</body>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>
