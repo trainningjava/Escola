@@ -1,8 +1,8 @@
 package com.acc.escola.enums;
 
 public enum Tipo {
-    SEM_BOLSA("1"),
-    BOLSISTA("2");
+    SEM_BOLSA("S"),
+    BOLSISTA("B");
 
     private String cod;
 

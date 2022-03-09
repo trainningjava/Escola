@@ -90,7 +90,7 @@ public class PessoaController {
             redirectAttr.addFlashAttribute("errorMessage", "Pessoa " + id + " não foi encontrado");
             return new ModelAndView("redirect:/pessoas");
         }
-        model.addObject("pessoa", pessoa);
+        model.addObject("pessoa", pessoa.get());
         model.addObject("listaSexos", Sexo.values());
         model.addObject("listaTipos", Tipo.values());
         return model;

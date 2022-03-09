@@ -86,19 +86,19 @@
                     <tr>
                         <td>Sexo:</td>
                         <td>
-                            <select th:name="sexo" id="sexo" class="form-select">
+                            <select th:field="*{sexo}" id="sexo">
 
                                 <option th:each="sexs : ${listaSexos}"
-                                        th:value="${sexs.cod}" th:text="${sexs}"></option>
+                                        th:value="${sexs.cod}" th:text="${sexs}" th:selected="${sexs.cod} == *{sexo}"></option>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <td>Tipo:</td>
                         <td>
-                            <select th:name="tipo" id="tipo"  class="form-select">
+                            <select th:field="*{tipo}" id="tipo"  class="form-select">
                                 <option th:each="tips : ${listaTipos}"
-                                        th:value="${tips.cod}" th:text="${tips}"></option>
+                                        th:value="${tips.cod}" th:text="${tips}" th:selected="${tips.cod} == *{tipo}"></option>
                             </select>
                         </td>
 

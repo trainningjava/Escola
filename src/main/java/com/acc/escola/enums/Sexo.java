@@ -2,9 +2,9 @@ package com.acc.escola.enums;
 
 public enum Sexo {
 
-        MASCULINO("1"),
-        FEMININO("2"),
-        OUTROS("3");
+        MASCULINO("M"),
+        FEMININO("F"),
+        OUTROS("O");
 
         private final String cod;
 
