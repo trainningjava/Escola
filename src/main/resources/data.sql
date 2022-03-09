@@ -12,3 +12,9 @@ insert into Disciplina (nome) values ('Portugues');
 insert into Disciplina (nome) values ('Ingles');
 insert into Disciplina (nome) values ('Geografia');
 insert into Disciplina (nome) values ('Economia');
+
+insert into Pessoa (nome, cpf, pessoa_sexo, pessoa_tipo) values ('Giovana Letícia da Conceição', '46880576877', 'F', 'B');
+insert into Pessoa (nome, cpf, pessoa_sexo, pessoa_tipo) values ('Isaac Noah Miguel da Mota', '15217406909', 'M', 'S');
+insert into Pessoa (nome, cpf, pessoa_sexo, pessoa_tipo) values ('Victor Daniel Santos', '06315893686', 'M', 'B');
+insert into Pessoa (nome, cpf, pessoa_sexo, pessoa_tipo) values ('Yasmin Isis Nunes', '18751535190', 'F', 'S');
+insert into Pessoa (nome, cpf, pessoa_sexo, pessoa_tipo) values ('Rita Maya Jéssica Santos', '28803990410', 'O', 'B');
