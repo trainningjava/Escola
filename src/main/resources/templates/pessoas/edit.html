@@ -83,12 +83,10 @@
                             <div class="alert alert-warning" th:if="${#fields.hasErrors('nome')}" th:errorclass="error"  th:errors="*{cpf}"></div>
                         </td>
                     </tr>
-
-                    </tr>
                     <tr>
                         <td>Sexo:</td>
                         <td>
-                            <select id="sexo" class="form-select">
+                            <select th:name="sexo" id="sexo" class="form-select">
 
                                 <option th:each="sexs : ${listaSexos}"
                                         th:value="${sexs.cod}" th:text="${sexs}"></option>
@@ -98,7 +96,7 @@
                     <tr>
                         <td>Tipo:</td>
                         <td>
-                            <select id="tipo"  class="form-select">
+                            <select th:name="tipo" id="tipo"  class="form-select">
                                 <option th:each="tips : ${listaTipos}"
                                         th:value="${tips.cod}" th:text="${tips}"></option>
                             </select>
