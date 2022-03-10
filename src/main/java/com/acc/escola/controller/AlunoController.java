@@ -1,12 +1,9 @@
 package com.acc.escola.controller;
 
 import com.acc.escola.enums.Bolsa;
-import com.acc.escola.enums.Sexo;
 import com.acc.escola.enums.Tipo;
 import com.acc.escola.model.Aluno;
 import com.acc.escola.model.responses.AlunoRespDTO;
-import com.acc.escola.model.responses.PessoaRespDTO;
-import com.acc.escola.repository.PessoaRepository;
 import com.acc.escola.service.AlunoService;
 import com.acc.escola.service.DisciplinaService;
 import com.acc.escola.service.PessoaService;
@@ -101,6 +98,16 @@ public class AlunoController {
                 aluno.setMensalidade(1000d);
             } else {
                 aluno.setMensalidade(1000 * ((100 -  aluno.getBolsa().doubleValue()) / 100));
+            }
+
+            List<Aluno> aluno1 = alunoService.getPessoa(aluno.getPessoa().getId());
+            if (!aluno1.isEmpty()) {
+                Long countDisciplina = aluno1.stream().filter(m -> m.getTurma().getId() == aluno.getTurma().getId()).count();
+                Integer sumCredito = aluno1.stream().filter(m -> m.getTurma().getId() == aluno.getTurma().getId())
+                                .mapToInt(m -> m.getDisciplina().getCredito()).sum();
+
+                System.out.println(countDisciplina);
+                System.out.println(sumCredito);
             }
 
             alunoService.save(aluno);

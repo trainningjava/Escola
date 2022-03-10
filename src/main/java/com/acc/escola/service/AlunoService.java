@@ -31,5 +31,9 @@ public class AlunoService {
         alunoRepository.deleteById(id);
     }
 
+    public List<Aluno> getPessoa(long id) {
+        return alunoRepository.findByPessoa (id);
+    }
+
 }
 
