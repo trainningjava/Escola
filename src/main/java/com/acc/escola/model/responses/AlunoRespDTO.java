@@ -3,19 +3,21 @@ package com.acc.escola.model.responses;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class PessoaRespDTO {
+public class AlunoRespDTO {
 
     private Long id;
 
     private String nome;
 
-    private String cpf;
+    private String alunoVLMensalidade;
 
-    private String sexo;
+    private String alunoTipoBolsa;
 
-    private String tipo;
+
 }

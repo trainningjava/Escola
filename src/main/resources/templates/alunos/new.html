@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cadastro de Novo Aluno</title>
+
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+
+    <link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet"/>
+
+    <link th:href="@{/webjars/font-awesome/css/font-awesome.min.css}" rel="stylesheet"/>
+
+    <link th:href="@{/css/estilo.css}" rel="stylesheet"/>
+</head>
+
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                    aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span> <span
+                    class="icon-bar"></span> <span class="icon-bar"></span> <span
+                    class="icon-bar"></span>
+            </button>
+
+            <a class="navbar-brand" th:href="@{/alunos}">Aluno</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle"
+                       data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">
+                        Menu
+                        <span class="caret"></span>
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{/}">Home</a></li>
+                        <li><a th:href="@{/turmas}">Turmas</a></li>
+                        <li><a th:href="@{/disciplinas}">Disciplinas</a></li>
+                        <li><a th:href="@{/pessoas}">Pessoas</a></li>
+                        <li><a th:href="@{/alunos}">Alunos</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="page-header">
+        <h1>Cadastro de uma novo aluno</h1>
+    </div>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>
+                <form action="#" th:action="@{/alunos/save}" th:object="${aluno}" method="post">
+                    <div th:if="${errorMessage}" th:text="${errorMessage}" class="error" />
+
+                    <table class="table table-striped table-bordered" >
+                        <tr>
+                            <td>Nome do Aluno:</td>
+                            <td>
+                                <select  th:field="*{pessoa.id}" id="pessoa.id" class="form-select">
+                                    <option th:each="aluno : ${listaAlunos}"
+                                            th:value="${aluno.id}" th:text="${aluno.nome}"></option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Turmas:</td>
+                            <td>
+                                <select  th:field="*{turma.id}" id="turma.id" class="form-select">
+                                    <option th:each="turma : ${listaTurmas}"
+                                            th:value="${turma.id}" th:text="${turma.nome}"></option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Disciplinas:</td>
+                            <td>
+                                <select  th:field="*{disciplina.id}" id="disciplina.id" class="form-select">
+                                    <option th:each="disc : ${listaDisciplinas}"
+                                            th:value="${disc.id}" th:text="${disc.nome}"></option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Disciplinas:</td>
+                            <td>
+                                <select  th:field="*{bolsa}" id="bolsa" class="form-select">
+                                    <option th:each="bolsas : ${listaBolsas}"
+                                            th:value="${bolsas.code}" th:text="${bolsas}"></option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr class="mb-2">
+                            <td><button class="btn btn-primary" type="submit">Save</button> </td>
+                            <td><a class="btn btn-secondary btn-lg active" aria-pressed="true" href="/alunos">Voltar</a></td>
+                        </tr>
+
+                    </table>
+                </form>
+            </th>
+        </tr>
+        </thead>
+    </table>
+</div>
+
+</body>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>
