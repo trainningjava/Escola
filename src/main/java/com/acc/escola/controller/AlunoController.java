@@ -66,10 +66,28 @@ public class AlunoController {
         Aluno aluno = new Aluno();
         model.addAttribute("aluno", aluno);
         model.addAttribute("listaAlunos", pessoaSvc.listAll());
-        model.addAttribute("listaTurmas", turmaSrv.listAll());
-        model.addAttribute("listaDisciplinas", disciplinaSvc.listAll());
-        model.addAttribute("listaBolsas", Bolsa.values());
         return "alunos/new";
+    }
+
+    @PostMapping("new1")
+    public ModelAndView cadastrarAluno1(@Valid Aluno aluno, BindingResult bindingResult, RedirectAttributes redirectAttr) {
+
+        ModelAndView model = new ModelAndView("alunos/newfinal");
+        Optional<Aluno> aluno1 = alunoService.getAluno(aluno.getPessoa().getId());
+        if (!aluno1.isPresent()) {
+            redirectAttr.addFlashAttribute("errorMessage", "Aluno " + aluno.getPessoa().getId() + " não cadastrado");
+            return new ModelAndView("redirect:/alunos");
+        }
+        model.addObject("aluno", aluno1.get());
+        model.addObject("listaTurmas", turmaSrv.listAll());
+        model.addObject("listaDisciplinas", disciplinaSvc.listAll());
+        if (aluno1.get().getPessoa().getTipo().equals(Tipo.SEM_BOLSA.getCod())) {
+            model.addObject("listaBolsas", Bolsa.B0);
+        } else {
+            model.addObject("listaBolsas", Bolsa.values());
+        }
+        return model;
+
     }
 
     @PostMapping("save")
@@ -124,10 +142,13 @@ public class AlunoController {
             return new ModelAndView("redirect:/alunos");
         }
         model.addObject("aluno", aluno.get());
-        model.addObject("listaAlunos", pessoaSvc.listAll());
         model.addObject("listaTurmas", turmaSrv.listAll());
         model.addObject("listaDisciplinas", disciplinaSvc.listAll());
-        model.addObject("listaBolsas", Bolsa.values());
+        if (aluno.get().getPessoa().getTipo().equals(Tipo.SEM_BOLSA.getCod())) {
+            model.addObject("listaBolsas", Bolsa.B0);
+        } else {
+            model.addObject("listaBolsas", Bolsa.values());
+        }
         return model;
     }
 

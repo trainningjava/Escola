@@ -72,6 +72,7 @@
         <tr>
             <th>#</th>
             <th>Disciplinas</th>
+            <th>Crédito</th>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
         </tr>
@@ -81,6 +82,7 @@
         <tr th:each="disci: ${disciplinas}">
             <td th:text="${disci.id}"></td>
             <td th:text="${disci.nome}"></td>
+            <td th:text="${disci.credito}"></td>
             <td><a th:href="@{/disciplinas/edit/{disciId} (disciId = ${disci.id})}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
             <td><a th:href="@{/disciplinas/delete/{disciId} (disciId = ${disci.id})}" th:onclick="if(!(confirm('Tem certeza em excluir ?' ) )) return false"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
         </tr>

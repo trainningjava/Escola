@@ -69,6 +69,7 @@
                         </td>
 
                     </tr>
+
                     <tr>
                         <td>Nome da Turma:</td>
                         <td>
@@ -77,6 +78,17 @@
                         </td>
 
                     </tr>
+
+                    <tr>
+                        <td>Crédito:</td>
+                        <td>
+                            <select th:field="*{credito}">
+                                <option th:each="i : ${#numbers.sequence(0, 5)}" th:value="${i}" th:text="${i}">
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+
                     <tr class="mb-2">
                         <td><button class="btn btn-primary" type="submit">Save</button> </td>
                         <td><a class="btn btn-secondary btn-lg active" aria-pressed="true" href="/disciplinas">Voltar</a></td>

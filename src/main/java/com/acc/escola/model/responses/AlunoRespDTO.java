@@ -3,8 +3,8 @@ package com.acc.escola.model.responses;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.persistence.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,11 +13,14 @@ public class AlunoRespDTO {
 
     private Long id;
 
-    private String nome;
+    private String pessoa;
 
-    private String alunoVLMensalidade;
+    private String turma;
 
-    private String alunoTipoBolsa;
+    private String disciplina;
 
+    private String bolsa;
+
+    private Double mensalidade;
 
 }
