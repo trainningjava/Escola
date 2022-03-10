@@ -66,27 +66,43 @@
                         <tr>
                             <td>Nome do Aluno:</td>
                             <td>
-                                <input class="form-control" type="text" th:field="*{nome}" id="nome">
-                                <div class="alert alert-warning" th:if="${#fields.hasErrors('nome')}" th:errorclass="error"  th:errors="*{nome}"></div>
-                            </td>
-                        </tr>
-
-                            <td>Tipo de Bolsa:</td>
-                            <td>
-                                <select name="alunoTipoBolsa" class="form-select">
-                                    <option th:each="tips : ${alunoTipoBolsa}"
-                                            th:value="${tips.code}" th:text="${tips}"></option>
+                                <select  th:field="*{pessoa.id}" id="pessoa.id" class="form-select">
+                                    <option th:each="aluno : ${listaAlunos}"
+                                            th:value="${aluno.id}" th:text="${aluno.nome}"></option>
                                 </select>
+                            </td>
+                        </tr>
 
-                            </td>
-                        </tr>
                         <tr>
-                            <td>Mensalidade do aluno:</td>
+                            <td>Turmas:</td>
                             <td>
-                                <input class="form-control" type="number" th:field="*{alunoVLMensalidade}" id="alunoVLMensalidade">
-                                <div class="alert alert-warning" th:if="${#fields.hasErrors('nome')}" th:errorclass="error"  th:errors="*{nome}"></div>
+                                <select  th:field="*{turma.id}" id="turma.id" class="form-select">
+                                    <option th:each="turma : ${listaTurmas}"
+                                            th:value="${turma.id}" th:text="${turma.nome}"></option>
+                                </select>
                             </td>
                         </tr>
+
+                        <tr>
+                            <td>Disciplinas:</td>
+                            <td>
+                                <select  th:field="*{disciplina.id}" id="disciplina.id" class="form-select">
+                                    <option th:each="disc : ${listaDisciplinas}"
+                                            th:value="${disc.id}" th:text="${disc.nome}"></option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Disciplinas:</td>
+                            <td>
+                                <select  th:field="*{bolsa}" id="bolsa" class="form-select">
+                                    <option th:each="bolsas : ${listaBolsas}"
+                                            th:value="${bolsas.code}" th:text="${bolsas}"></option>
+                                </select>
+                            </td>
+                        </tr>
+
                         <tr class="mb-2">
                             <td><button class="btn btn-primary" type="submit">Save</button> </td>
                             <td><a class="btn btn-secondary btn-lg active" aria-pressed="true" href="/alunos">Voltar</a></td>

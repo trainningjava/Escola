@@ -19,11 +19,7 @@ public class AlunoService {
 
     public List<Aluno> listAll() { return alunoRepository.findAll(); }
 
-    public interface PessoaService {
-
-    }
-
-    public void save(Aluno aluno) throws Exception {
+    public void save(Aluno aluno) {
         alunoRepository.save(aluno);
     }
 

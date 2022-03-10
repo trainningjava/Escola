@@ -72,6 +72,9 @@
         <tr>
             <th>#</th>
             <th>Aluno</th>
+            <th>Turma</th>
+            <th>Disciplina</th>
+            <th>Bolsa</th>
             <th>Mensalidade</th>
             <td></td>
             <td>&nbsp;</td>
@@ -81,8 +84,11 @@
         <tbody>
         <tr th:each="aluno: ${alunos}">
             <td th:text="${aluno.id}"></td>
-            <td th:text="${aluno.alunoVLMensalidade}"></td>
-
+            <td th:text="${aluno.pessoa}"></td>
+            <td th:text="${aluno.turma}"></td>
+            <td th:text="${aluno.disciplina}"></td>
+            <td th:text="${aluno.bolsa}"></td>
+            <td th:text="${aluno.mensalidade}"></td>
 
             <td><a th:href="@{/alunos/edit/{alunoId} (alunoId = ${aluno.id})}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
             <td><a th:href="@{/alunos/delete/{alunoId} (alunoId = ${aluno.id})}" th:onclick="if(!(confirm('Tem certeza que deseja excluir ?' ) )) return false"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
