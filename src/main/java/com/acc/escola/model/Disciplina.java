@@ -23,4 +23,6 @@ public class Disciplina implements Serializable {
     @NotEmpty(message = "O campo nome não pode ser em branco")
     @Column(length = 45)
     private String nome;
+
+    private Integer credito;
 }
