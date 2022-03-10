@@ -14,7 +14,7 @@ public interface AlunoRepository extends JpaRepository<Aluno, Long> {
     @Query("select count(*) from Aluno where turma.id = :id")
     Integer countDisciplinasa(Long id);
 
-    @Query("Select sum(disciplina.credito) from Aluno where pessoa.id = :id and turma.id = :turmaid")
-    Integer sumCreditoPessoa(Long id, Long turmaid);
+    @Query("Select sum(disciplina.credito) from Aluno where pessoa.id = :id")
+    Integer sumCreditoPessoa(Long id);
 
 }

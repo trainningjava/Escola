@@ -45,7 +45,7 @@ public class AlunoService {
             throw new Exception("Quantidade de disciplina ultrapassada");
         }
 
-        Integer valor = alunoRepository.sumCreditoPessoa(aluno.getPessoa().getId(), aluno.getTurma().getId());
+        Integer valor = alunoRepository.sumCreditoPessoa(aluno.getPessoa().getId());
         if (valor == null) return;
 
         Optional<Disciplina> dis = disciplinaSvc.get(aluno.getDisciplina().getId());
