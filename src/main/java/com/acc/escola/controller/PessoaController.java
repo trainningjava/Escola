@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import com.acc.escola.enums.Sexo;
 import com.acc.escola.enums.Tipo;
+import com.acc.escola.mapper.PessoaMapper;
 import com.acc.escola.model.Pessoa;
 import com.acc.escola.model.responses.PessoaRespDTO;
 import com.acc.escola.service.PessoaService;
@@ -27,20 +28,13 @@ public class PessoaController {
     @Autowired
     private PessoaService pessoaSvc;
 
+    @Autowired
+    PessoaMapper pessoaMapper;
+
     @GetMapping
     public String viewPessoaHome(Model model, RedirectAttributes redirectAttr) {
         List<Pessoa> lista =  pessoaSvc.listAll();
-        List<PessoaRespDTO> listaResp = lista.stream().map(resp -> {
-            PessoaRespDTO dto = new PessoaRespDTO();
-            dto.setId(resp.getId());
-            dto.setCpf(resp.getCpf());
-            dto.setNome(resp.getNome());
-            dto.setSexo(Sexo.toDesc(resp.getSexo()));
-            dto.setTipo( Tipo.toDesc(resp.getTipo()).replace("_", " "));
-            return dto;
-        }).collect(Collectors.toList());
-
-        model.addAttribute("pessoas", listaResp);
+        model.addAttribute("pessoas", pessoaMapper.convertListaPessoa(lista));
         return "pessoas/index";
     }
     @GetMapping("new")
@@ -61,8 +55,7 @@ public class PessoaController {
             pessoaSvc.save(pessoa);
 
         } catch (Exception e){
-            redirectAttr.addFlashAttribute("errorMessage", e.getMessage());
-
+            redirectAttr.addFlashAttribute("errorMessage", e.toString());
         }
 
         return "redirect:/pessoas";
@@ -77,11 +70,11 @@ public class PessoaController {
             pessoaSvc.save(pessoa);
 
         } catch (Exception e){
-            redirectAttr.addFlashAttribute("errorMessage", e.getMessage());
-
+            redirectAttr.addFlashAttribute("errorMessage", e.toString());
         }
         return "redirect:/pessoas";
     }
+
     @RequestMapping("edit/{id}")
     public ModelAndView editPessoa(@PathVariable(name = "id") int id, RedirectAttributes redirectAttr) {
         ModelAndView model = new ModelAndView("pessoas/edit");
@@ -95,6 +88,7 @@ public class PessoaController {
         model.addObject("listaTipos", Tipo.values());
         return model;
     }
+
     @RequestMapping("delete/{id}")
     public String deletePessoa(@PathVariable(name = "id") int id, RedirectAttributes redirectAttr) {
         Optional<Pessoa> pessoa = pessoaSvc.get(id);

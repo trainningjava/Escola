@@ -2,7 +2,10 @@ package com.acc.escola.controller;
 
 import com.acc.escola.enums.Bolsa;
 import com.acc.escola.enums.Tipo;
+import com.acc.escola.mapper.AlunoMapper;
 import com.acc.escola.model.Aluno;
+import com.acc.escola.model.Disciplina;
+import com.acc.escola.model.Pessoa;
 import com.acc.escola.model.responses.AlunoRespDTO;
 import com.acc.escola.service.AlunoService;
 import com.acc.escola.service.DisciplinaService;
@@ -40,21 +43,13 @@ public class AlunoController {
     @Autowired
     private DisciplinaService disciplinaSvc;
 
+    @Autowired
+    AlunoMapper alunoMapper;
+
     @GetMapping
     public String listarAlunos(Model model, RedirectAttributes redirectAttr) {
         List<Aluno> lista =  alunoService.listAll();
-        List<AlunoRespDTO> listaResp = lista.stream().map(resp -> {
-            AlunoRespDTO dto = new AlunoRespDTO();
-            dto.setId(resp.getId());
-            dto.setPessoa(resp.getPessoa().getNome());
-            dto.setTurma(resp.getTurma().getNome());
-            dto.setDisciplina(resp.getDisciplina().getNome());
-            dto.setBolsa(Bolsa.toDesc(resp.getBolsa()));
-            dto.setMensalidade(resp.getMensalidade());
-            return dto;
-        }).collect(Collectors.toList());
-
-        model.addAttribute("alunos", listaResp);
+        model.addAttribute("alunos", alunoMapper.convertListaAluno(lista));
         return "alunos/index";
     }
 
@@ -70,51 +65,40 @@ public class AlunoController {
     public ModelAndView cadastrarAluno1(@Valid Aluno aluno, BindingResult bindingResult, RedirectAttributes redirectAttr) {
 
         ModelAndView model = new ModelAndView("alunos/newfinal");
-        Optional<Aluno> aluno1 = alunoService.getAluno(aluno.getPessoa().getId());
-        if (!aluno1.isPresent()) {
+
+        Optional<Pessoa> pessoa = pessoaSvc.get(aluno.getPessoa().getId());
+        if (!pessoa.isPresent()) {
             redirectAttr.addFlashAttribute("errorMessage", "Aluno " + aluno.getPessoa().getId() + " não cadastrado");
             return new ModelAndView("redirect:/alunos");
         }
-        model.addObject("aluno", aluno1.get());
+        aluno.getPessoa().setNome(pessoa.get().getNome());
+        model.addObject("aluno", aluno);
         model.addObject("listaTurmas", turmaSrv.listAll());
         model.addObject("listaDisciplinas", disciplinaSvc.listAll());
-        if (aluno1.get().getPessoa().getTipo().equals(Tipo.SEM_BOLSA.getCod())) {
+        if (pessoa.get().getTipo().equals(Tipo.SEM_BOLSA.getCod())) {
             model.addObject("listaBolsas", Bolsa.B0);
         } else {
             model.addObject("listaBolsas", Bolsa.values());
         }
         return model;
-
     }
 
     @PostMapping("save")
     public String saveAluno(@Valid Aluno aluno, BindingResult bindingResult, RedirectAttributes redirectAttr) throws Exception {
         if (bindingResult.hasErrors()) {
             redirectAttr.addFlashAttribute("errorMessage", "Erro ao salvar");
-            return "alunos/new";
+            return "redirect:/alunos/new";
         }
         try {
-            if (aluno.getBolsa() == 0) {
-                aluno.setMensalidade(1000d);
-            } else {
-                aluno.setMensalidade(1000 * ((100 -  aluno.getBolsa().doubleValue()) / 100));
-            }
+            alunoService.calculaMensalidade(aluno);
 
-            List<Aluno> aluno1 = alunoService.getPessoa(aluno.getPessoa().getId());
-            if (!aluno1.isEmpty()) {
-                Long countDisciplina = aluno1.stream().filter(m -> m.getTurma().getId() == aluno.getTurma().getId()).count();
-                Integer sumCredito = aluno1.stream().filter(m -> m.getTurma().getId() == aluno.getTurma().getId())
-                                .mapToInt(m -> m.getDisciplina().getCredito()).sum();
-
-                System.out.println(countDisciplina);
-                System.out.println(sumCredito);
-            }
+            alunoService.valida(aluno);
 
             alunoService.save(aluno);
 
         } catch (Exception e){
-            redirectAttr.addFlashAttribute("errorMessage", e.getMessage());
-
+            redirectAttr.addFlashAttribute("errorMessage", e.toString());
+            return "redirect:/alunos/new";
         }
         return "redirect:/alunos";
     }
@@ -123,14 +107,13 @@ public class AlunoController {
     public String savEditPessoa(@Valid Aluno aluno, BindingResult bindingResult, RedirectAttributes redirectAttr) {
         if (bindingResult.hasErrors()) {
             redirectAttr.addFlashAttribute("errorMessage", "Erro ao salvar");
-            return "alunos/edit";
+            return "redirect:/alunos/edit";
         }
         try {
-            if (aluno.getBolsa() == 0) {
-                aluno.setMensalidade(1000d);
-            } else {
-                aluno.setMensalidade(1000 * ((100 -  aluno.getBolsa().doubleValue()) / 100));
-            }
+            alunoService.calculaMensalidade(aluno);
+
+            alunoService.valida(aluno);
+
             alunoService.save(aluno);
 
         } catch (Exception e){
