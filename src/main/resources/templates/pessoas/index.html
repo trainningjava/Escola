@@ -72,6 +72,7 @@
         <tr>
             <th>#</th>
             <th>Pessoa</th>
+            <th>CPF</th>
             <th>Sexo</th>
             <th>Tipo</th>
             <td>&nbsp;</td>
@@ -83,6 +84,7 @@
         <tr th:each="pessoa: ${pessoas}">
             <td th:text="${pessoa.id}"></td>
             <td th:text="${pessoa.nome}"></td>
+            <td th:text="${pessoa.cpf}"></td>
             <td th:text="${pessoa.sexo}"></td>
             <td th:text="${pessoa.tipo}"></td>
 
