@@ -18,3 +18,11 @@ insert into Pessoa (nome, cpf, pessoa_sexo, pessoa_tipo) values ('Isaac Noah Mig
 insert into Pessoa (nome, cpf, pessoa_sexo, pessoa_tipo) values ('Victor Daniel Santos', '06315893686', 'M', 'B');
 insert into Pessoa (nome, cpf, pessoa_sexo, pessoa_tipo) values ('Yasmin Isis Nunes', '18751535190', 'F', 'S');
 insert into Pessoa (nome, cpf, pessoa_sexo, pessoa_tipo) values ('Rita Maya Jéssica Santos', '28803990410', 'O', 'B');
+
+--insert into Aluno (ALUNO_TIPO_BOLSA,  ALUNOVLMENSALIDADE, ALUNOID) values (1, 1000, 1);
+insert into Aluno (pessoa_id, turma_id, disciplina_id, bolsa, mensalidade) values (1, 1, 1, 90, 100);
+
+insert into Aluno (pessoa_id, turma_id, disciplina_id, bolsa, mensalidade) values (2, 2, 1, 50, 500);
+insert into Aluno (pessoa_id, turma_id, disciplina_id, bolsa, mensalidade) values (2, 2, 2, 50, 500);
+
+insert into Aluno (pessoa_id, turma_id, disciplina_id, bolsa, mensalidade) values (3, 3, 1, 50, 900);
