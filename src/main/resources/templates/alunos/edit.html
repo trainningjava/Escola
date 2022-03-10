@@ -72,10 +72,8 @@
                         <tr>
                             <td>Nome do Aluno:</td>
                             <td>
-                                <select  th:field="*{pessoa.id}" id="pessoa.id" class="form-select">
-                                    <option th:each="aluno : ${listaAlunos}"
-                                            th:value="${aluno.id}" th:text="${aluno.nome}"></option>
-                                </select>
+                                <input type="hidden" th:field="*{pessoa.id}" readonly="readonly">
+                                <input type="text" th:field="*{pessoa.nome}" readonly="readonly">
                             </td>
                         </tr>
 
